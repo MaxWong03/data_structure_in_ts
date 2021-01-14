@@ -31,6 +31,37 @@ var LinkedList = /** @class */ (function () {
             currentNode.nextNode = newNode;
         }
     };
+    LinkedList.prototype.deleteNode = function (nodeData) {
+        var firstNode = this.head;
+        // linked list is empty, throw error
+        if (!firstNode) {
+            throw new Error('Can not delete a linked list that is empty');
+        }
+        // the linked list only has a head and head contains what we want to delete
+        if (this.head.data === nodeData && !this.head.nextNode)
+            return null;
+        // linked list with length > 1
+        // head contains what we want to delete
+        if (this.head.data === nodeData && this.head.nextNode) {
+            // remove head
+            this.head = this.head.nextNode;
+        }
+        // set currentNode pointer to head
+        var currentNode = this.head;
+        var prevNode;
+        while (currentNode.nextNode) {
+            if (currentNode.data !== nodeData) {
+                prevNode = currentNode;
+                currentNode = currentNode.nextNode;
+            }
+            if (currentNode.data === nodeData) {
+                if (currentNode === this.head)
+                    this.head = this.head.nextNode;
+                else
+                    prevNode.nextNode = currentNode.nextNode;
+            }
+        }
+    };
     LinkedList.prototype.displayList = function () {
         var linkedListString = '';
         var firstNode = this.head;
@@ -45,8 +76,13 @@ var LinkedList = /** @class */ (function () {
     };
     return LinkedList;
 }());
-var headNode = new ListNode(5);
+var headNode = new ListNode(1);
 var linkedList = new LinkedList(headNode);
+linkedList.addNode(3);
+linkedList.addNode(4);
+linkedList.addNode(1);
+console.log('before deletion:');
 linkedList.displayList();
-linkedList.addNode(7);
+linkedList.deleteNode(3);
+console.log('after deletion:');
 linkedList.displayList();

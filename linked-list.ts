@@ -28,16 +28,45 @@ class LinkedList {
     else if (!firstNode.nextNode) {
       this.head.nextNode = newNode;
     }
-    
+
     else {
       // if there is more than one node in the linked list, traverse till the tail, and append the newNode as the new tail
       currentNode = firstNode; // set current node to the firstNode (head)
-      while(currentNode.nextNode) {
+      while (currentNode.nextNode) {
         currentNode = currentNode.nextNode;
       }
       // while loop breaks, reach tail
       // append newNode as the new tail
       currentNode.nextNode = newNode;
+    }
+  }
+
+  deleteNode(nodeData: number) {
+    const firstNode = this.head;
+    // linked list is empty, throw error
+    if (!firstNode) {
+      throw new Error('Can not delete a linked list that is empty');
+    }
+    // the linked list only has a head and head contains what we want to delete
+    if (this.head.data === nodeData && !this.head.nextNode) return null;
+    // linked list with length > 1
+    // head contains what we want to delete
+    if (this.head.data === nodeData && this.head.nextNode) {
+      // remove head
+      this.head = this.head.nextNode;
+    }
+    // set currentNode pointer to head
+    let currentNode = this.head;
+    let prevNode;
+    while (currentNode.nextNode) {
+      if (currentNode.data !== nodeData) {
+        prevNode = currentNode;
+        currentNode = currentNode.nextNode;
+      }
+      if (currentNode.data === nodeData) {
+        if (currentNode === this.head) this.head = this.head.nextNode;
+        else prevNode!.nextNode = currentNode.nextNode;
+      }
     }
   }
 
@@ -47,7 +76,7 @@ class LinkedList {
     let currentNode;
     linkedListString += `${firstNode.data.toString()}`
     currentNode = firstNode;
-    while(currentNode.nextNode) {
+    while (currentNode.nextNode) {
       currentNode = currentNode.nextNode;
       linkedListString += ` ${currentNode.data.toString()}`
     }
@@ -55,9 +84,16 @@ class LinkedList {
   }
 }
 
-const headNode = new ListNode(5);
+const headNode = new ListNode(1);
 
 const linkedList = new LinkedList(headNode);
+linkedList.addNode(3);
+linkedList.addNode(4);
+linkedList.addNode(1);
+linkedList.addNode(3);
+console.log('before deletion:'); 
 linkedList.displayList();
-linkedList.addNode(7);
+linkedList.deleteNode(3);
+console.log('after deletion:'); 
 linkedList.displayList();
+
