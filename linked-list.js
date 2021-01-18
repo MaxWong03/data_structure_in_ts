@@ -51,6 +51,12 @@ var LinkedList = /** @class */ (function () {
             currentNode = currentNode.nextNode;
         }
     };
+    LinkedList.prototype.prependNode = function (nodeData) {
+        var newNode = new ListNode(nodeData);
+        var currentHead = this.head;
+        newNode.nextNode = currentHead;
+        this.head = newNode;
+    };
     LinkedList.prototype.displayList = function () {
         var linkedListString = '';
         var firstNode = this.head;
@@ -76,4 +82,7 @@ linkedList.displayList();
 linkedList.deleteNode(3);
 linkedList.deleteNode(3);
 console.log('after deletion:');
+linkedList.displayList();
+linkedList.prependNode(5);
+console.log('after prepend:');
 linkedList.displayList();

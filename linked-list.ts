@@ -62,6 +62,13 @@ class LinkedList {
     }
   }
 
+  prependNode(nodeData: number) {
+    const newNode = new ListNode(nodeData);
+    const currentHead = this.head;
+    newNode.nextNode = currentHead;
+    this.head = newNode;
+  }
+
   displayList() {
     let linkedListString = '';
     const firstNode = this.head;
@@ -89,4 +96,8 @@ linkedList.deleteNode(3);
 linkedList.deleteNode(3);
 console.log('after deletion:'); 
 linkedList.displayList();
+linkedList.prependNode(5);
+console.log('after prepend:');
+linkedList.displayList();
+
 
