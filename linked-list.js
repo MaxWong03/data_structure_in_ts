@@ -7,18 +7,21 @@ var ListNode = /** @class */ (function () {
 var LinkedList = /** @class */ (function () {
     function LinkedList(node) {
         this.head = node;
+        this.tail = node;
     }
     LinkedList.prototype.addNode = function (nodeData) {
         var newNode = new ListNode(nodeData);
         var firstNode = this.head;
         var currentNode;
-        // if the linked list is empty, set head to newNode 
+        // if the linked list is empty, set head to newNode, also set tail to the newNode
         if (!firstNode) {
             this.head = newNode;
+            this.tail = newNode;
         }
         // if the linked list only has one node, set tail to newNode
         else if (!firstNode.nextNode) {
             this.head.nextNode = newNode;
+            this.tail = newNode;
         }
         else {
             // if there is more than one node in the linked list, traverse till the tail, and append the newNode as the new tail
@@ -29,6 +32,7 @@ var LinkedList = /** @class */ (function () {
             // while loop breaks, reach tail
             // append newNode as the new tail
             currentNode.nextNode = newNode;
+            this.tail = newNode;
         }
     };
     // Delete the first node that contains the nodeData
@@ -46,6 +50,8 @@ var LinkedList = /** @class */ (function () {
         while (currentNode.nextNode) {
             if (currentNode.nextNode.data === nodeData) {
                 currentNode.nextNode = currentNode.nextNode.nextNode;
+                if (!currentNode.nextNode)
+                    this.tail = currentNode;
                 return;
             }
             currentNode = currentNode.nextNode;

@@ -9,9 +9,11 @@ class ListNode {
 
 class LinkedList {
   head: ListNode;
+  tail: ListNode;
 
   constructor(node: ListNode) {
     this.head = node;
+    this.tail = node;
   }
 
   addNode(nodeData: number) {
@@ -19,14 +21,16 @@ class LinkedList {
     const firstNode = this.head;
     let currentNode;
 
-    // if the linked list is empty, set head to newNode 
+    // if the linked list is empty, set head to newNode, also set tail to the newNode
     if (!firstNode) {
       this.head = newNode;
+      this.tail = newNode;
     }
 
     // if the linked list only has one node, set tail to newNode
     else if (!firstNode.nextNode) {
       this.head.nextNode = newNode;
+      this.tail = newNode;
     }
 
     else {
@@ -38,6 +42,7 @@ class LinkedList {
       // while loop breaks, reach tail
       // append newNode as the new tail
       currentNode.nextNode = newNode;
+      this.tail = newNode;
     }
   }
 
@@ -56,6 +61,7 @@ class LinkedList {
     while (currentNode.nextNode) {
       if (currentNode.nextNode.data === nodeData) {
         currentNode.nextNode = currentNode.nextNode.nextNode;
+        if (!currentNode.nextNode) this.tail = currentNode;
         return;
       }
       currentNode = currentNode.nextNode;
@@ -85,13 +91,17 @@ class LinkedList {
     let linkedListString = '';
     const firstNode = this.head;
     let currentNode;
-    linkedListString += `${firstNode.data.toString()}`
+    linkedListString += `${firstNode.data.toString()}`;
     currentNode = firstNode;
     while (currentNode.nextNode) {
       currentNode = currentNode.nextNode;
       linkedListString += ` ${currentNode.data.toString()}`
     }
     console.log(linkedListString);
+  }
+
+  reverseList() {
+    // https://www.geeksforgeeks.org/reverse-a-linked-list/
   }
 }
 
