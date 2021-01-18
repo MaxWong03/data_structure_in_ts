@@ -69,6 +69,18 @@ class LinkedList {
     this.head = newNode;
   }
 
+  search(nodeData: number) {
+    if (this.head.data === nodeData) {
+      return true;
+    }
+    let currentNode = this.head.nextNode;
+    while (currentNode.nextNode) {
+      if (currentNode.data === nodeData) return true
+      currentNode = currentNode.nextNode;
+    }
+    return false;
+  }
+
   displayList() {
     let linkedListString = '';
     const firstNode = this.head;
@@ -99,5 +111,7 @@ linkedList.displayList();
 linkedList.prependNode(5);
 console.log('after prepend:');
 linkedList.displayList();
+console.log('Does 5 exist in the list:', linkedList.search(5));
+console.log('Does 6 exist in the list:', linkedList.search(6));
 
 

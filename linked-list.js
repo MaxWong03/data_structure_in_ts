@@ -57,6 +57,18 @@ var LinkedList = /** @class */ (function () {
         newNode.nextNode = currentHead;
         this.head = newNode;
     };
+    LinkedList.prototype.search = function (nodeData) {
+        if (this.head.data === nodeData) {
+            return true;
+        }
+        var currentNode = this.head.nextNode;
+        while (currentNode.nextNode) {
+            if (currentNode.data === nodeData)
+                return true;
+            currentNode = currentNode.nextNode;
+        }
+        return false;
+    };
     LinkedList.prototype.displayList = function () {
         var linkedListString = '';
         var firstNode = this.head;
@@ -86,3 +98,5 @@ linkedList.displayList();
 linkedList.prependNode(5);
 console.log('after prepend:');
 linkedList.displayList();
+console.log('Does 5 exist in the list:', linkedList.search(5));
+console.log('Does 6 exist in the list:', linkedList.search(6));
