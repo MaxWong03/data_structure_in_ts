@@ -41,32 +41,24 @@ class LinkedList {
     }
   }
 
+  // Delete the first node that contains the nodeData
   deleteNode(nodeData: number) {
-    const firstNode = this.head;
     // linked list is empty, throw error
-    if (!firstNode) {
+    if (!this.head) {
       throw new Error('Can not delete a linked list that is empty');
     }
-    // the linked list only has a head and head contains what we want to delete
-    if (this.head.data === nodeData && !this.head.nextNode) return null;
-    // linked list with length > 1
-    // head contains what we want to delete
-    if (this.head.data === nodeData && this.head.nextNode) {
-      // remove head
+    // if the head contains the data we want to delete
+    if (this.head.data === nodeData) {
       this.head = this.head.nextNode;
+      return;
     }
-    // set currentNode pointer to head
     let currentNode = this.head;
-    let prevNode;
     while (currentNode.nextNode) {
-      if (currentNode.data !== nodeData) {
-        prevNode = currentNode;
-        currentNode = currentNode.nextNode;
+      if (currentNode.nextNode.data === nodeData) {
+        currentNode.nextNode = currentNode.nextNode.nextNode;
+        return;
       }
-      if (currentNode.data === nodeData) {
-        if (currentNode === this.head) this.head = this.head.nextNode;
-        else prevNode!.nextNode = currentNode.nextNode;
-      }
+      currentNode = currentNode.nextNode;
     }
   }
 
@@ -93,6 +85,7 @@ linkedList.addNode(1);
 linkedList.addNode(3);
 console.log('before deletion:'); 
 linkedList.displayList();
+linkedList.deleteNode(3);
 linkedList.deleteNode(3);
 console.log('after deletion:'); 
 linkedList.displayList();
