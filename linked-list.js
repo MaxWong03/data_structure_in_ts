@@ -7,7 +7,6 @@ var ListNode = /** @class */ (function () {
 var LinkedList = /** @class */ (function () {
     function LinkedList(node) {
         this.head = node;
-        this.tail = node;
     }
     LinkedList.prototype.addNode = function (nodeData) {
         var newNode = new ListNode(nodeData);
@@ -16,12 +15,10 @@ var LinkedList = /** @class */ (function () {
         // if the linked list is empty, set head to newNode, also set tail to the newNode
         if (!firstNode) {
             this.head = newNode;
-            this.tail = newNode;
         }
         // if the linked list only has one node, set tail to newNode
         else if (!firstNode.nextNode) {
             this.head.nextNode = newNode;
-            this.tail = newNode;
         }
         else {
             // if there is more than one node in the linked list, traverse till the tail, and append the newNode as the new tail
@@ -32,7 +29,6 @@ var LinkedList = /** @class */ (function () {
             // while loop breaks, reach tail
             // append newNode as the new tail
             currentNode.nextNode = newNode;
-            this.tail = newNode;
         }
     };
     // Delete the first node that contains the nodeData
@@ -50,8 +46,6 @@ var LinkedList = /** @class */ (function () {
         while (currentNode.nextNode) {
             if (currentNode.nextNode.data === nodeData) {
                 currentNode.nextNode = currentNode.nextNode.nextNode;
-                if (!currentNode.nextNode)
-                    this.tail = currentNode;
                 return;
             }
             currentNode = currentNode.nextNode;
@@ -87,9 +81,22 @@ var LinkedList = /** @class */ (function () {
         }
         console.log(linkedListString);
     };
+    LinkedList.prototype.reverseList = function () {
+        var prev = null;
+        var curr = this.head;
+        var next = null;
+        while (curr.nextNode) {
+            next = curr.nextNode;
+            curr.nextNode = null;
+            prev = curr;
+            curr = next;
+        }
+        this.head = curr;
+        console.log(this.head);
+    };
     return LinkedList;
 }());
-var headNode = new ListNode(1);
+var headNode = new ListNode(8);
 var linkedList = new LinkedList(headNode);
 linkedList.addNode(3);
 linkedList.addNode(4);
@@ -106,3 +113,6 @@ console.log('after prepend:');
 linkedList.displayList();
 console.log('Does 5 exist in the list:', linkedList.search(5));
 console.log('Does 6 exist in the list:', linkedList.search(6));
+linkedList.reverseList();
+console.log('after reverse list:');
+linkedList.displayList();

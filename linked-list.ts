@@ -1,5 +1,6 @@
+type ListNodeType = ListNode | null;
 class ListNode {
-  nextNode: ListNode;
+  nextNode: ListNodeType;
   data: number;
 
   constructor(input: number) {
@@ -7,13 +8,12 @@ class ListNode {
   }
 }
 
+
 class LinkedList {
-  head: ListNode;
-  tail: ListNode;
+  head: ListNodeType;
 
   constructor(node: ListNode) {
     this.head = node;
-    this.tail = node;
   }
 
   addNode(nodeData: number) {
@@ -24,13 +24,11 @@ class LinkedList {
     // if the linked list is empty, set head to newNode, also set tail to the newNode
     if (!firstNode) {
       this.head = newNode;
-      this.tail = newNode;
     }
 
     // if the linked list only has one node, set tail to newNode
     else if (!firstNode.nextNode) {
       this.head.nextNode = newNode;
-      this.tail = newNode;
     }
 
     else {
@@ -42,7 +40,6 @@ class LinkedList {
       // while loop breaks, reach tail
       // append newNode as the new tail
       currentNode.nextNode = newNode;
-      this.tail = newNode;
     }
   }
 
@@ -61,7 +58,6 @@ class LinkedList {
     while (currentNode.nextNode) {
       if (currentNode.nextNode.data === nodeData) {
         currentNode.nextNode = currentNode.nextNode.nextNode;
-        if (!currentNode.nextNode) this.tail = currentNode;
         return;
       }
       currentNode = currentNode.nextNode;
@@ -101,11 +97,21 @@ class LinkedList {
   }
 
   reverseList() {
-    // https://www.geeksforgeeks.org/reverse-a-linked-list/
+    let prev = null;
+    let curr = this.head;
+    let next = null;
+    while(curr.nextNode) {
+      next = curr.nextNode;
+      curr.nextNode = null;
+      prev = curr;
+      curr = next;
+    }
+    this.head = curr;
+    console.log(this.head);
   }
 }
 
-const headNode = new ListNode(1);
+const headNode = new ListNode(8);
 
 const linkedList = new LinkedList(headNode);
 linkedList.addNode(3);
@@ -121,7 +127,11 @@ linkedList.displayList();
 linkedList.prependNode(5);
 console.log('after prepend:');
 linkedList.displayList();
+
 console.log('Does 5 exist in the list:', linkedList.search(5));
 console.log('Does 6 exist in the list:', linkedList.search(6));
+linkedList.reverseList();
+console.log('after reverse list:');
+linkedList.displayList();
 
 
