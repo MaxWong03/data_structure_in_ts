@@ -101,13 +101,14 @@ class LinkedList {
     let curr = this.head;
     let next = null;
     while(curr.nextNode) {
-      next = curr.nextNode;
-      curr.nextNode = null;
-      prev = curr;
-      curr = next;
+      next = curr.nextNode; // store next node
+      curr.nextNode = prev; // reverse pointer direction
+      prev = curr; // store prev node
+      curr = next; // shift current pointer
     }
-    this.head = curr;
-    console.log(this.head);
+    // break out of the loop, reach the end of list
+    this.head = curr; // set new head pointer
+    curr.nextNode = prev; // reverse pointer direction
   }
 }
 
