@@ -1,9 +1,12 @@
+"use strict";
+exports.__esModule = true;
 var ListNode = /** @class */ (function () {
     function ListNode(input) {
         this.data = input;
     }
     return ListNode;
 }());
+exports.ListNode = ListNode;
 var LinkedList = /** @class */ (function () {
     function LinkedList(node) {
         this.head = node;
@@ -79,7 +82,6 @@ var LinkedList = /** @class */ (function () {
             currentNode = currentNode.nextNode;
             linkedListString += " " + currentNode.data.toString();
         }
-        console.log(linkedListString);
     };
     LinkedList.prototype.reverseList = function () {
         var prev = null;
@@ -97,23 +99,24 @@ var LinkedList = /** @class */ (function () {
     };
     return LinkedList;
 }());
+exports.LinkedList = LinkedList;
 var headNode = new ListNode(8);
 var linkedList = new LinkedList(headNode);
 linkedList.addNode(3);
 linkedList.addNode(4);
 linkedList.addNode(1);
 linkedList.addNode(3);
-console.log('before deletion:');
+// console.log('before deletion:'); 
 linkedList.displayList();
 linkedList.deleteNode(3);
 linkedList.deleteNode(3);
-console.log('after deletion:');
+// console.log('after deletion:'); 
 linkedList.displayList();
 linkedList.prependNode(5);
-console.log('after prepend:');
+// console.log('after prepend:');
 linkedList.displayList();
-console.log('Does 5 exist in the list:', linkedList.search(5));
-console.log('Does 6 exist in the list:', linkedList.search(6));
+// console.log('Does 5 exist in the list:', linkedList.search(5));
+// console.log('Does 6 exist in the list:', linkedList.search(6));
 linkedList.reverseList();
-console.log('after reverse list:');
+// console.log('after reverse list:');
 linkedList.displayList();

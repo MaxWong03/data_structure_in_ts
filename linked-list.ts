@@ -1,5 +1,5 @@
-type ListNodeType = ListNode | null;
-class ListNode {
+export type ListNodeType = ListNode | null;
+export class ListNode {
   nextNode: ListNodeType;
   data: number;
 
@@ -9,7 +9,7 @@ class ListNode {
 }
 
 
-class LinkedList {
+export class LinkedList {
   head: ListNodeType;
 
   constructor(node: ListNode) {
@@ -93,7 +93,6 @@ class LinkedList {
       currentNode = currentNode.nextNode;
       linkedListString += ` ${currentNode.data.toString()}`
     }
-    console.log(linkedListString);
   }
 
   reverseList() {
@@ -119,20 +118,20 @@ linkedList.addNode(3);
 linkedList.addNode(4);
 linkedList.addNode(1);
 linkedList.addNode(3);
-console.log('before deletion:'); 
+// console.log('before deletion:'); 
 linkedList.displayList();
 linkedList.deleteNode(3);
 linkedList.deleteNode(3);
-console.log('after deletion:'); 
+// console.log('after deletion:'); 
 linkedList.displayList();
 linkedList.prependNode(5);
-console.log('after prepend:');
+// console.log('after prepend:');
 linkedList.displayList();
 
-console.log('Does 5 exist in the list:', linkedList.search(5));
-console.log('Does 6 exist in the list:', linkedList.search(6));
+// console.log('Does 5 exist in the list:', linkedList.search(5));
+// console.log('Does 6 exist in the list:', linkedList.search(6));
 linkedList.reverseList();
-console.log('after reverse list:');
+// console.log('after reverse list:');
 linkedList.displayList();
 
 
