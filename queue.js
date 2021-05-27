@@ -13,7 +13,7 @@ var Queue = /** @class */ (function () {
         }
         else if (this.head && !this.tail) {
             this.tail = newNode;
-            this.head.nextNode = this.tail;
+            this.head.nextNode = newNode;
         }
         else {
             this.tail.nextNode = newNode;
@@ -21,8 +21,22 @@ var Queue = /** @class */ (function () {
             this.tail.nextNode = null;
         }
     };
+    Queue.prototype.pop = function () {
+        if (!this.head && !this.tail) {
+            console.log('queue is empty, nothing to delete');
+        }
+        else if (this.head && !this.tail) {
+            this.head = null;
+        }
+        else {
+            this.head = this.head.nextNode;
+        }
+    };
+    Queue.prototype.peek = function () {
+        console.log(this.head.data + " is at the front of the queue");
+    };
     Queue.prototype.print = function () {
-        var _a;
+        var _a, _b;
         if (!this.head && !this.tail) {
             console.log('this queue is empty');
         }
@@ -37,6 +51,7 @@ var Queue = /** @class */ (function () {
                 queueString = ((_a = currentNode) === null || _a === void 0 ? void 0 : _a.data.toString()) + " " + queueString;
                 currentNode = currentNode.nextNode;
             }
+            queueString = ((_b = currentNode) === null || _b === void 0 ? void 0 : _b.data.toString()) + " " + queueString;
             console.log('Queue (from right to left):', queueString);
         }
     };
@@ -48,5 +63,10 @@ myQueue.add(8);
 myQueue.print();
 myQueue.add(6);
 myQueue.add(5);
+myQueue.print();
 myQueue.add(4);
 myQueue.print();
+myQueue.pop();
+myQueue.pop();
+myQueue.print();
+myQueue.peek();
