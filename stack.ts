@@ -38,11 +38,11 @@ class Stack {
       let stackString = ''
       let currentNode = this.head;
       while (currentNode.nextNode) {
-        stackString += currentNode.data.toString();
+        stackString += `\n${currentNode.data.toString()}`;
         currentNode = currentNode.nextNode;
       }
-      stackString += currentNode.data.toString();
-      console.log(`Stack (from left to right): ${stackString}`);
+      stackString += `\n${currentNode.data.toString()}`;
+      console.log(`Stack: ${stackString}`);
     }
   }
 }
