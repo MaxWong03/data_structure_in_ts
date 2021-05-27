@@ -2,37 +2,31 @@ import { ListNode, ListNodeType } from './linked-list';
 
 class Stack {
   head: ListNodeType;
-  next: ListNodeType;
 
   add(data: number) {
     const newNode = new ListNode(data);
-    if (!this.head && !this.next) {
+    if (!this.head) {
       this.head = newNode;
+      this.head.nextNode = null;
     }
     else {
-      this.next = this.head;
+      const newNextNode = this.head;
       this.head = newNode;
+      this.head.nextNode = newNextNode;
     }
-    // console.log('this.head:', this.head);
-    // console.log('this.next:', this.next);
   }
   print() {
-    if (!this.head && !this.next) {
+    if (!this.head) {
       console.log('this stack is empty');
     }
     else {
       let stackString = ''
       let currentNode = this.head;
-      console.log('this.head:', this.head);
-      stackString += currentNode.data.toString();
-      console.log('stackString:', stackString)
-      console.log('currentNode:', currentNode);
       while (currentNode.nextNode) {
         stackString += currentNode.data.toString();
-        console.log('stackString:', stackString)
         currentNode = currentNode.nextNode;
-        console.log('currentNode:', currentNode);
       }
+      stackString += currentNode.data.toString();
       console.log(`Stack: ${stackString}`);
     }
   }

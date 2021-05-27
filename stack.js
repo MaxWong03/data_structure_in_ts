@@ -6,33 +6,28 @@ var Stack = /** @class */ (function () {
     }
     Stack.prototype.add = function (data) {
         var newNode = new linked_list_1.ListNode(data);
-        if (!this.head && !this.next) {
+        if (!this.head) {
             this.head = newNode;
+            this.head.nextNode = null;
         }
         else {
-            this.next = this.head;
+            var newNextNode = this.head;
             this.head = newNode;
+            this.head.nextNode = newNextNode;
         }
-        // console.log('this.head:', this.head);
-        // console.log('this.next:', this.next);
     };
     Stack.prototype.print = function () {
-        if (!this.head && !this.next) {
+        if (!this.head) {
             console.log('this stack is empty');
         }
         else {
             var stackString = '';
             var currentNode = this.head;
-            console.log('this.head:', this.head);
-            stackString += currentNode.data.toString();
-            console.log('stackString:', stackString);
-            console.log('currentNode:', currentNode);
             while (currentNode.nextNode) {
                 stackString += currentNode.data.toString();
-                console.log('stackString:', stackString);
                 currentNode = currentNode.nextNode;
-                console.log('currentNode:', currentNode);
             }
+            stackString += currentNode.data.toString();
             console.log("Stack: " + stackString);
         }
     };
