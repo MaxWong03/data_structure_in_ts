@@ -16,6 +16,18 @@ var Stack = /** @class */ (function () {
             this.head.nextNode = newNextNode;
         }
     };
+    Stack.prototype.pop = function () {
+        if (!this.head) {
+            console.log('stack is empty, nothing to delete');
+        }
+        else {
+            var newHead = this.head.nextNode;
+            this.head = newHead;
+        }
+    };
+    Stack.prototype.peek = function () {
+        console.log(this.head.data + " is at the top of the stack");
+    };
     Stack.prototype.print = function () {
         if (!this.head) {
             console.log('this stack is empty');
@@ -28,16 +40,20 @@ var Stack = /** @class */ (function () {
                 currentNode = currentNode.nextNode;
             }
             stackString += currentNode.data.toString();
-            console.log("Stack: " + stackString);
+            console.log("Stack (from left to right): " + stackString);
         }
     };
     return Stack;
 }());
 var myStack = new Stack();
-// myStack.print();
+myStack.print();
 myStack.add(8);
-// myStack.print();
+myStack.print();
 myStack.add(6);
 myStack.add(5);
-// myStack.add(4);
+myStack.add(4);
 myStack.print();
+myStack.pop();
+myStack.pop();
+myStack.pop();
+myStack.peek();

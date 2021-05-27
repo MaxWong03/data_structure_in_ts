@@ -15,6 +15,21 @@ class Stack {
       this.head.nextNode = newNextNode;
     }
   }
+
+  pop() {
+    if (!this.head) {
+      console.log('stack is empty, nothing to delete');
+    }
+    else {
+      const newHead = this.head.nextNode;
+      this.head = newHead;
+    }
+  }
+
+  peek() {
+    console.log(`${this.head.data} is at the top of the stack`);
+  }
+
   print() {
     if (!this.head) {
       console.log('this stack is empty');
@@ -27,17 +42,21 @@ class Stack {
         currentNode = currentNode.nextNode;
       }
       stackString += currentNode.data.toString();
-      console.log(`Stack: ${stackString}`);
+      console.log(`Stack (from left to right): ${stackString}`);
     }
   }
 }
 
 const myStack = new Stack();
-// myStack.print();
+myStack.print();
 myStack.add(8);
-// myStack.print();
+myStack.print();
 myStack.add(6);
 myStack.add(5);
-// myStack.add(4);
+myStack.add(4);
 myStack.print();
+myStack.pop();
+myStack.pop();
+myStack.pop();
+myStack.peek();
 
